@@ -1,66 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const CoffeeInventory = () => {
-  return (
-    <div>
-        
+    const [coffee, setCoffee] = useState([]);
 
-<div class="relative overflow-x-auto">
-    <table class="w-full text-sm text-left dark:text-gray-300">
-        <thead class="text-xs uppercase bg-yellow-700 dark:text-white">
-            <tr>
-                <th scope="col" class="px-6 py-3 rounded-l-lg">
-                    Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Quantity
-                </th>
-                <th scope="col" class="px-6 py-3 rounded-r-lg">
-                    Price
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="bg-white bg-yellow-600">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Americano
-                </th>
-                <td class="px-6 py-4">
-                    20
-                </td>
-                <td class="px-6 py-4">
-                    $99
-                </td>
-            </tr>
-            <tr class="bg-white bg-yellow-600">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Latte
-                </th>
-                <td class="px-6 py-4">
-                    50
-                </td>
-                <td class="px-6 py-4">
-                    $300
-                </td>
-            </tr>
-            <tr class="bg-white bg-yellow-600">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Cappuccino
-                </th>
-                <td class="px-6 py-4">
-                   90
-                </td>
-                <td class="px-6 py-4">
-                    $699
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    useEffect(() => {
+        fetch('http://localhost:5000/api/coffee')
+            .then((res) => res.json())
+            .then((data) => setCoffee(data))
+            .catch((err) => console.log(err));
+    }, []);
 
+    return (
+        <div>
+            <div className="relative overflow-x-auto">
+                <table className="w-full text-sm text-left dark:text-gray-300">
+                    <thead className="text-xs uppercase bg-yellow-700 dark:text-white">
+                        <tr>
+                            <th scope="col" className="px-6 py-3 rounded-l-lg">
+                                Name
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Quantity
+                            </th>
+                            <th scope="col" className="px-6 py-3 rounded-r-lg">
+                                Price
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {coffee.map((item) => (
+                            <tr key={item.id} className="bg-white bg-yellow-600">
+                                <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{item.quantity}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
 
-    </div>
-  )
-}
-
-export default CoffeeInventory
+export default CoffeeInventory;
