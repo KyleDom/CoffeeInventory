@@ -14,7 +14,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon Server/app.js"
+    "dev": "nodemon Server/app.js",
+    "seed": "sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "ISC",

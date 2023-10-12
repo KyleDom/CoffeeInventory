@@ -57,5 +57,5 @@ const deleteCoffeeById = async (req, res) => {
 
 
 
+module.exports = { addCoffee, getAllCoffees, getCoffeeById, deleteCoffeeById};
 
-module.exports = { addCoffee, getAllCoffees, getCoffeeById, deleteCoffeeById}; //sumOfPrices };
